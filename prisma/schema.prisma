@@ -13,3 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Quiz {
+  entityId         Int    @id @default(autoincrement())
+  uuid             String @unique @default(uuid())
+  title            String
+  description      String
+  shortDescription String
+  bgColor          String
+  image            String
+  imageSmall       String
+  tasks            Task[]
+
+  @@map("quiz")
+}
+
+model Task {
+  entityId    Int    @id @default(autoincrement())
+  quizId      Int
+  extId       String
+  title       String
+  description String
+  quiz        Quiz   @relation(fields: [quizId], references: [entityId], onDelete: Cascade)
+
+  @@map("task")
+}

@@ -25,6 +25,8 @@ async function bootstrap() {
 
     await app.register(fastifyMultipart);
 
+    app.enableCors()
+
     app.useGlobalFilters(new GlobalExceptionFilter());
     app.useGlobalPipes(new GlobalValidationPipe(GLOBAL_VALIDATION_PIPE_OPTIONS));
 
